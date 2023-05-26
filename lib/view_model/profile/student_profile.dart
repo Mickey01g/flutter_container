@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_container/component/sign_controller.dart';
 import 'package:flutter_container/view_model/dashboard/student_dashboard.dart';
+import 'package:flutter_container/view_model/services/data_fetch.dart';
 
 class StudentProfile extends StatefulWidget {
   const StudentProfile({Key? key}) : super(key: key);
@@ -17,26 +18,26 @@ class _StudentProfileState extends State<StudentProfile> {
   
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: userData,
-        builder: (BuildContext context,
-            AsyncSnapshot<QuerySnapshot>snapshot){
-        if(snapshot.hasError){
-          SignController.toastMessage("Something Went Wrong");
-        }
-        if(snapshot.connectionState==ConnectionState.waiting){
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          final List storeData=[];
-          snapshot.data!.docs.map((DocumentSnapshot document){
-            Map a=document.data() as Map<String,dynamic>;
-            storeData.add(a);
-            if (kDebugMode) {
-              print(storeData);
-            }
-          }).toList();
+    // return StreamBuilder<QuerySnapshot>(
+    //   stream: userData,
+    //     builder: (BuildContext context,
+    //         AsyncSnapshot<QuerySnapshot>snapshot){
+    //     if(snapshot.hasError){
+    //       SignController.toastMessage("Something Went Wrong");
+    //     }
+    //     if(snapshot.connectionState==ConnectionState.waiting){
+    //         return const Center(
+    //           child: CircularProgressIndicator(),
+    //         );
+    //       }
+    //       final List storeData=[];
+    //       snapshot.data!.docs.map((DocumentSnapshot document){
+    //         Map a=document.data() as Map<String,dynamic>;
+    //         storeData.add(a);
+    //         if (kDebugMode) {
+    //           print(storeData);
+    //         }
+    //       }).toList();
 
           return Scaffold(
             appBar: AppBar(
@@ -49,14 +50,15 @@ class _StudentProfileState extends State<StudentProfile> {
                     width: MediaQuery.of(context).size.width,
                     height:150,
                     color: Colors.orangeAccent,
-                    child: const SingleChildScrollView(
+                    child: SingleChildScrollView(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
                             padding: EdgeInsets.only(top: 20),
-                            child: Text("Mickey",style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),textScaleFactor: 1.7,),
+                            child: Text(e1.name),
+                            // child: Text("Mickey",style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),textScaleFactor: 1.7,),
                           ),
                         ],
                       ),
@@ -134,8 +136,6 @@ class _StudentProfileState extends State<StudentProfile> {
               ),
             ),
           );
-        }
-    );
 
   }
 }
