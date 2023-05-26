@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_container/component/sign_controller.dart';
 import 'package:flutter_container/view_model/dashboard/student_dashboard.dart';
 import 'package:flutter_container/view_model/services/data_fetch.dart';
 
@@ -41,7 +39,7 @@ class _StudentProfileState extends State<StudentProfile> {
 
           return Scaffold(
             appBar: AppBar(
-              title:const Text("Profile"),
+              title: const Text("Profile"),
             ),
             body: Material(
               child: Column(
@@ -56,7 +54,7 @@ class _StudentProfileState extends State<StudentProfile> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(top: 20),
+                            padding: const EdgeInsets.only(top: 20),
                             child: Text(e1.name),
                             // child: Text("Mickey",style:TextStyle(fontWeight: FontWeight.bold,color: Colors.white),textScaleFactor: 1.7,),
                           ),
@@ -71,52 +69,52 @@ class _StudentProfileState extends State<StudentProfile> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.only(top: 20),
+                         Padding(
+                          padding: const EdgeInsets.only(top: 20),
                           child: Column(
                             children: [
                               //=====student userId here============
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("UserId :",textScaleFactor: 1,),
-                                  SizedBox(
+                                  const Text("Enrollment No :",textScaleFactor: 1,),
+                                  const SizedBox(
                                     width: 15,
                                   ),
-                                  Text("CSJMA2000130XXXX",textScaleFactor: 1,),
+                                  Text(e1.regNo,textScaleFactor: 1,),
                                 ],
                               ),
                               //=====student Contact here============
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Contact :",textScaleFactor: 1,),
-                                  SizedBox(
+                                  const Text("Contact :",textScaleFactor: 1,),
+                                  const SizedBox(
                                     width: 15,
                                   ),
-                                  Text("90441529XX",textScaleFactor: 1,),
+                                  Text(e1.phone,textScaleFactor: 1,),
                                 ],
                               ),
                               //=====student RoomNo here============
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Room no :",textScaleFactor: 1,),
-                                  SizedBox(
+                                  const Text("Room no :",textScaleFactor: 1,),
+                                  const SizedBox(
                                     width: 15,
                                   ),
-                                  Text("C-102",textScaleFactor: 1,),
+                                  Text(e1.room,textScaleFactor: 1,),
                                 ],
                               ),
 
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Course :",textScaleFactor: 1,),
-                                  SizedBox(
+                                  const Text("Course :",textScaleFactor: 1,),
+                                  const SizedBox(
                                     width: 15,
                                   ),
-                                  Text("BCA III",textScaleFactor: 1,),
+                                  Text(e1.course,textScaleFactor: 1,),
                                 ],
                               ),
                             ],

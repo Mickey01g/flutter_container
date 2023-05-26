@@ -11,9 +11,21 @@ class UserData {
   late String name;
   late String phone;
   late String email;
-  UserData({required this.name,required this.phone,required this.email});
+  late String room;
+  late String regNo;
+  late String course;
+  UserData(
+      {
+        required this.name,
+        required this.phone,
+        required this.email,
+        required this.room,
+        required this.regNo,
+        required this.course
+      }
+      );
 }
-final e1=UserData(name: '', phone: '', email: '');
+final e1=UserData(name: '', phone: '', email: '', room: '', regNo: '', course: '');
 
 
 
@@ -43,17 +55,20 @@ fetch3() async{
   final CollectionReference contacts=FirebaseFirestore.instance.collection("users");
   final gSheets = GSheets(credentials);
   final ss = await gSheets.spreadsheet(spreadsheetId);
-  //getting currentuser
+  //getting currentUser
 
   var sheet = ss.worksheetByTitle("description");
-  int rows =sheet!.rowCount.length;
+  int rows =sheet!.columnCount.length;
   try{
     List<Cell>? cellsRow;
     for(var i=1; i<rows; i++){
-      cellsRow=await sheet?.cells.row(i);
-      var username=cellsRow?.elementAt(0).value;
-      var phone=cellsRow?.elementAt(1).value.toString();
-      var email =cellsRow?.elementAt(2).value;
+      cellsRow=await sheet.cells.row(i);
+      var username=cellsRow.elementAt(0).value;
+      var email=cellsRow.elementAt(1).value;
+      var room =cellsRow.elementAt(2).value;
+      var  regNo=cellsRow.elementAt(3).value;
+      var  phone=cellsRow.elementAt(4).value.toString();
+      var course=cellsRow.elementAt(5).value;
 
       var currentUser = FirebaseAuth.instance.currentUser;
       if (kDebugMode) {
@@ -62,16 +77,12 @@ fetch3() async{
       if (currentUser!=null){
         var fEmail=currentUser.email.toString();
         if (fEmail==email) {
-
-            e1.email=fEmail!;
-            e1.phone=phone!;
-            e1.name=username!;
-          if (kDebugMode) {
-            print("Data Uploaded ");
-            print(e1.phone);
-            print(e1.name);
-
-          }
+            e1.email=fEmail;
+            e1.phone=phone;
+            e1.name=username;
+            e1.room=room;
+            e1.regNo=regNo;
+            e1.course=course;
         }
         else{
           SignController.toastMessage("Something Went Wrong");
@@ -80,14 +91,10 @@ fetch3() async{
       else{
         SignController.toastMessage("User Not Found");
       }
-
     }
 
 
   }catch(e){
-    if (kDebugMode) {
-      print(e.toString());
-    }
     SignController.toastMessage(e.toString());
   }
 
