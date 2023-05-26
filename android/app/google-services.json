@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "594824420094",
+    "firebase_url": "https://csjmuhostel-e45f1-default-rtdb.firebaseio.com",
+    "project_id": "csjmuhostel-e45f1",
+    "storage_bucket": "csjmuhostel-e45f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594824420094:android:aa8256ded7f07e0e54a3af",
+        "android_client_info": {
+          "package_name": "com.csjmu_hostel.flutter_container"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594824420094-kobu0s08qma1ic9mnk1rm0qb4im49jvv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCY-fO-JzFCo0eF9Iuv1uZtNa-E_LGGNfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594824420094-kobu0s08qma1ic9mnk1rm0qb4im49jvv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
