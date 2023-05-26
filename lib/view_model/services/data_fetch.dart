@@ -14,6 +14,7 @@ class UserData {
   late String room;
   late String regNo;
   late String course;
+  late String image;
   UserData(
       {
         required this.name,
@@ -21,11 +22,12 @@ class UserData {
         required this.email,
         required this.room,
         required this.regNo,
-        required this.course
+        required this.course,
+        required this.image,
       }
       );
 }
-final e1=UserData(name: '', phone: '', email: '', room: '', regNo: '', course: '');
+final e1=UserData(name: '', phone: '', email: '', room: '', regNo: '', course: '', image: '');
 
 
 
@@ -69,6 +71,7 @@ fetch3() async{
       var  regNo=cellsRow.elementAt(3).value;
       var  phone=cellsRow.elementAt(4).value.toString();
       var course=cellsRow.elementAt(5).value;
+      var image=cellsRow.elementAt(6).value.toString();
 
       var currentUser = FirebaseAuth.instance.currentUser;
       if (kDebugMode) {
@@ -83,6 +86,7 @@ fetch3() async{
             e1.room=room;
             e1.regNo=regNo;
             e1.course=course;
+            e1.image=image;
         }
         else{
           SignController.toastMessage("Something Went Wrong");
