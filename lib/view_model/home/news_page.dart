@@ -18,7 +18,8 @@ class NewsPage extends StatelessWidget {
             child: ElevatedButton(
               onPressed:(){
                 // createAllUsers();
-                // createAnnouncement();
+                // DoGet().createAnnouncement("data");
+                DoGet().complaint("sdfkjllsadf","sdf","fdsfsd","sdsdg","hjjhd");
               },
               child: Text("PDF GET"),
 

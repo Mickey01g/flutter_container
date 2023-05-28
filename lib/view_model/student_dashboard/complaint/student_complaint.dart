@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_container/view_model/announcement_create/create_announcement.dart';
 import 'package:gsheets/gsheets.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../../component/sign_controller.dart';
+import '../../services/data_fetch.dart';
 
 const _credentials = r'''
   {
@@ -45,19 +47,19 @@ class MyComplaint extends StatefulWidget {
 }
 
 class _MyComplaintState extends State<MyComplaint> {
-  static const List<String> list = <String>[
-    'ELECTRICIAN ',
-    'COMMON PROBLEM',
-    'PROBLEM ',
-    'OTHER'
+  static  List<String> list = <String>[
+    'ELECTRICITY ',
+    'MESS',
   ];
 
   String dropdownValue = list.first;
+  final complaintcontroller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    const name = "Mickey0";
-    const room = "103";
-    const contact = "64383023404";
+    String name = e1.name;
+    String room = e1.room;
+    String contact = e1.phone;
 
     return Scaffold(
       appBar: AppBar(
@@ -93,14 +95,14 @@ class _MyComplaintState extends State<MyComplaint> {
                           height: 25,
                           child: Row(
                             children: [
-                              const Text("Name :"),
-                              const SizedBox(
+                               Text("Name :"),
+                               SizedBox(
                                 width: 20,
                               ),
                               SizedBox(
                                 width: 100,
                                 child: TextFormField(
-                                  decoration: const InputDecoration(
+                                  decoration:  InputDecoration(
                                     border: InputBorder.none,
                                     labelText: name,
                                   ),
@@ -124,7 +126,7 @@ class _MyComplaintState extends State<MyComplaint> {
                               SizedBox(
                                 width: 100,
                                 child: TextFormField(
-                                  decoration: const InputDecoration(
+                                  decoration:  InputDecoration(
                                     border: InputBorder.none,
                                     labelText: room,
                                   ),
@@ -148,7 +150,7 @@ class _MyComplaintState extends State<MyComplaint> {
                               SizedBox(
                                 width: 100,
                                 child: TextFormField(
-                                  decoration: const InputDecoration(
+                                  decoration:  InputDecoration(
                                     border: InputBorder.none,
                                     labelText: contact,
                                   ),
@@ -227,10 +229,11 @@ class _MyComplaintState extends State<MyComplaint> {
                         ],
                       ),
                     ),
-                    const Padding(
+                     Padding(
                       padding: EdgeInsets.only(
                           left: 15, bottom: 20, right: 10, top: 10),
                       child: TextField(
+                        controller: complaintcontroller,
                         decoration: InputDecoration(
                             labelText: "Description",
                             labelStyle: TextStyle(fontSize: 18),
@@ -251,7 +254,8 @@ class _MyComplaintState extends State<MyComplaint> {
                         ElevatedButton(
                           onPressed: (){
                             // HostelDatabase();
-                            Fetch();
+                            DoGet().complaint(complaintcontroller.text, dropdownValue, e1.name, e1.room, e1.course);
+                            // Fetch();
                   },
                           child: const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20),
