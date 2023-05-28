@@ -13,7 +13,7 @@ class HostelFacultyPage extends StatelessWidget {
       ),
       body:SafeArea(
         child:Container(
-          child: Image.asset("assets/images/hostel-faculty.jpg",fit: BoxFit.fill,),
+          child:Image.asset("assets/images/hostel-staff.jpg",fit: BoxFit.fill,),
         )
       ),
     );
