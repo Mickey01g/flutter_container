@@ -23,7 +23,7 @@ class _StudentProfileState extends State<StudentProfile> {
           title: 'Profile'.text.make(),
         ),
         body: Padding(
-          padding: EdgeInsets.only(top:28),
+          padding: EdgeInsets.only(top:31),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,17 +46,17 @@ class _StudentProfileState extends State<StudentProfile> {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Container(
                 color: Colors.grey,
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height/1.5,
                 child: Column(
                   children: [
-                    SizedBox(height: 30,),
+                    const SizedBox(height: 30,),
                     Center(child: Text(e1.regNo,style:TextStyle(),textScaleFactor:1.5,),),
                     // Divider(color: Colors.black.withOpacity(2),),
-                    SizedBox(height: 30,),
+                    const SizedBox(height: 30,),
                     ListTile(
                       leading: Icon(Icons.person_outline),
                       title: "Username".text.make(),
@@ -77,6 +77,21 @@ class _StudentProfileState extends State<StudentProfile> {
                       title: "Email".text.make(),
                       trailing: Text(e1.email),
                     ),
+                    Spacer(),
+                    InkWell(
+                      onTap: (){
+                        Navigator.of(context).pop();
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Container(
+                          width: 150,
+                          height: 40,
+                          color: Colors.blue,
+                          child: Center(child: Text("Back")),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               )
