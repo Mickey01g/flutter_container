@@ -164,19 +164,29 @@ class _StudentDashboardPageState extends State<StudentDashboardPage> {
                             const SizedBox(height: 20,),
                             Row(
                               children: [
-                                Card(
-                                  color: Colors.blue.shade300,
-                                  child: const SizedBox(
-                                    width: 140,height: 140,
-                                    child: Center(child: Text("Announcement",style:TextStyle(fontSize: 16,color: Colors.white))),
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.pushNamed(context,RouteName.announcementview);
+                                  },
+                                  child:Card(
+                                    color: Colors.blue.shade300,
+                                    child: const SizedBox(
+                                      width: 140,height: 140,
+                                      child: Center(child: Text("Announcement",style:TextStyle(fontSize: 16,color: Colors.white))),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(width: 20,),
-                                Card(
-                                  color: Colors.blue.shade300,
-                                  child: const SizedBox(
-                                    width: 140,height: 140,
-                                    child: Center(child: Text("Track Complain",style:TextStyle(fontSize: 16,color: Colors.white))),
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.pushNamed(context,RouteName.trackcomplain);
+                                  },
+                                  child:Card(
+                                    color: Colors.blue.shade300,
+                                    child: const SizedBox(
+                                      width: 140,height: 140,
+                                      child: Center(child: Text("Track Complain",style:TextStyle(fontSize: 16,color: Colors.white))),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -187,7 +197,7 @@ class _StudentDashboardPageState extends State<StudentDashboardPage> {
                     ),
                     const Spacer(),
                     CupertinoButton(onPressed: (){
-                      Navigator.pushNamed(context,RouteName.mycomplaint);
+                      Navigator.pushNamed(context,RouteName.complaint);
                     }, color: Colors.blue,child: const Text("Create Complaint",
                       style:TextStyle(color: Colors.white),
                       textScaleFactor: 1,textAlign: TextAlign.center,))

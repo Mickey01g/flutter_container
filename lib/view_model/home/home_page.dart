@@ -60,7 +60,6 @@ class _HomePageState extends State<HomePage> {
       onWillPop: () => onWillPop(context),
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
           backgroundColor: Colors.red,
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
@@ -130,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                   Column(
                     children: [
                       ElevatedButton(onPressed: () {
-                        Navigator.pushReplacementNamed(context,RouteName.newspage);
+                        Navigator.pushNamed(context, RouteName.announcementview);
                       }, style: TextButton.styleFrom(
                             minimumSize: const Size(290, 60)),
                         child: const Text("Announcements"),

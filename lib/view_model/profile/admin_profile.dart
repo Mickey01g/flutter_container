@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_container/view_model/login/admin_login.dart';
 import 'package:flutter_container/view_model/services/data_fetch.dart';
 import 'package:velocity_x/velocity_x.dart';
-import '../../utils/routes_name.dart';
+
 
 class AdminProfile extends StatefulWidget {
   const AdminProfile({Key? key}) : super(key: key);
@@ -12,9 +12,6 @@ class AdminProfile extends StatefulWidget {
   State<AdminProfile> createState() => _AdminProfileState();
 }
 class _AdminProfileState extends State<AdminProfile> {
-
-  final Stream<QuerySnapshot> userData =
-  FirebaseFirestore.instance.collection("users").snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +51,8 @@ class _AdminProfileState extends State<AdminProfile> {
                 height: MediaQuery.of(context).size.height/1.5,
                 child: Column(
                   children: [
-                    SizedBox(height: 30,),
-                    Center(child: Text(e1.regNo,style:TextStyle(),textScaleFactor:1.5,),),
+                    const SizedBox(height: 30,),
+                    Center(child: Text(admin.role,style:TextStyle(),textScaleFactor:1.5,),),
                     // Divider(color: Colors.black.withOpacity(2),),
                     SizedBox(height: 30,),
                     ListTile(
@@ -65,19 +62,11 @@ class _AdminProfileState extends State<AdminProfile> {
                     ),
                     ListTile(
                       leading: Icon(Icons.bedroom_child_outlined),
-                      title: "Room No".text.make(),
-                      trailing: Text(e1.room),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.phone),
                       title: "Contact".text.make(),
-                      trailing: Text(e1.phone),
+                      trailing: Text(admin.phone),
                     ),
-                    ListTile(
-                      leading: Icon(Icons.mail_outline_outlined),
-                      title: "Email".text.make(),
-                      trailing: Text(e1.email),
-                    ),
+
+
                   ],
                 ),
               )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_container/view_model/home/about_page.dart';
 import 'package:flutter_container/view_model/home/news_page.dart';
 import 'package:flutter_container/utils/routes_name.dart';
 import 'package:flutter_container/view_model/admin_dashboard/admin_dashboard.dart';
@@ -9,8 +10,10 @@ import 'package:flutter_container/view_model/login/admin_login.dart';
 import 'package:flutter_container/view_model/login/sLoginPage.dart';
 import 'package:flutter_container/view_model/profile/admin_profile.dart';
 import 'package:flutter_container/view_model/profile/student_profile.dart';
+import 'package:flutter_container/view_model/student_dashboard/complaint/track_complain.dart';
 import 'package:flutter_container/view_model/user_create/create_user.dart';
 import '../view_model/services/splash_screen.dart';
+import '../view_model/student_dashboard/announcement_view.dart';
 import '../view_model/student_dashboard/complaint/complain.dart';
 import '../view_model/student_dashboard/complaint/student_complaint.dart';
 import '../view_model/student_dashboard/student_dashboard.dart';
@@ -46,6 +49,12 @@ class Routes{
         return MaterialPageRoute(builder: (context)=>const CreateUser());
       case RouteName.adminprofile:
         return MaterialPageRoute(builder: (context)=>const AdminProfile());
+      case RouteName.aboutpage:
+        return MaterialPageRoute(builder: (context)=>const AboutPage());
+      case RouteName.trackcomplain:
+        return MaterialPageRoute(builder: (context)=>const TrackComplain());
+      case RouteName.announcementview:
+        return MaterialPageRoute(builder: (context)=>const AnnouncementView());
 
       default:
         return MaterialPageRoute(builder: (context){

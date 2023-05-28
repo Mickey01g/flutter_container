@@ -13,5 +13,8 @@ class RouteName{
   static const String newspage='news_page';
   static const String createuser='create_user';
   static const String adminprofile="admin_profile";
+  static const String aboutpage="about_page";
+  static const String trackcomplain="track_complain";
+  static const String announcementview="announcement_view";
 
 }

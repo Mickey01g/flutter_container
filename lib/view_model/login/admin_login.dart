@@ -7,7 +7,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gsheets/gsheets.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../component/inputfield.dart';
-import '../../component/roundbutton.dart';
 import '../../component/sign_controller.dart';
 
 
@@ -68,13 +67,13 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
       cellsRow = await sheet?.cells.row(i);
       if(cellsRow?.elementAt(2)!=null) {
       }
-      if (userId==cellsRow?.elementAt(2).value.toString() || password ==cellsRow?.elementAt(3).value.toString()){
+      if (userId==cellsRow?.elementAt(2).value.toString() && password ==cellsRow?.elementAt(3).value.toString()){
         var name=cellsRow?.elementAt(1).value.toString();
         var role=cellsRow?.elementAt(4).value.toString();
         var mobile=cellsRow?.elementAt(5).value.toString();
         admin.name=name.toString();
-        admin.name=role.toString();
-        admin.name=mobile.toString();
+        admin.role=role.toString();
+        admin.phone=mobile.toString();
         // ignore: use_build_context_synchronously
         Navigator.pushReplacementNamed(context,RouteName.admindashboard);
         break;
@@ -171,7 +170,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                                                     onFieldSubmitValue:(value){
                                                       SignController.fieldFocus(context, emailFocusNode, passwordFocusNode);
                                                     },
-                                                    keyBoradType: TextInputType.text,
+                                                    keyBoradType: TextInputType.emailAddress,
                                                     obscureText: false,
                                                     hint: "Email",
                                                     onValidator:(value){

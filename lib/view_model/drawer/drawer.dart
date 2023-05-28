@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_container/utils/routes_name.dart';
 import 'package:velocity_x/velocity_x.dart';
 class MyDrawer extends StatelessWidget {
+  const MyDrawer({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,9 @@ class MyDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.account_box,color:Colors.white,),
               title: Text("About",style:TextStyle(color: Colors.white),),
-              onTap:null,
+              onTap:(){
+                Navigator.pushNamed(context,RouteName.aboutpage);
+              },
             ),
             ListTile(
               leading: Icon(Icons.help_center,color: Colors.white,),
