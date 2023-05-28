@@ -26,7 +26,7 @@ class Routes{
       case RouteName.adminlogin:
         return MaterialPageRoute(builder: (context)=>const AdminLoginPage());
       case RouteName.announcement:
-        return MaterialPageRoute(builder: (context)=>const Announcement());
+        return MaterialPageRoute(builder: (context)=> Announcement());
       case RouteName.hostelfaculty:
         return MaterialPageRoute(builder: (context)=>const HostelFacultyPage());
       case RouteName.studentprofile:

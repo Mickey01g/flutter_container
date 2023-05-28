@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_container/utils/routes.dart';
 import 'package:flutter_container/utils/routes_name.dart';
+import 'package:flutter_container/view_model/announcement_create/create_announcement.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,6 +13,7 @@ void main() async{
   // if (kDebugMode) {
   //   print(snapshot.docs.toList());
   // }
+  // DoGet().createAnnouncement();
   runApp( MyApp());
 }
 class MyApp extends StatefulWidget {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_container/view_model/user_create/createuser.dart';
+
+import '../announcement_create/create_announcement.dart';
 class NewsPage extends StatelessWidget {
 
 
@@ -15,7 +17,8 @@ class NewsPage extends StatelessWidget {
           child: Center(
             child: ElevatedButton(
               onPressed:(){
-                createAllUsers();
+                // createAllUsers();
+                // createAnnouncement();
               },
               child: Text("PDF GET"),
 

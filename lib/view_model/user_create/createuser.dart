@@ -39,7 +39,7 @@ void createAllUsers() async {
       // print(cellsRow.elementAt(0));
       // sheet.values.insertValue("value", column: 3, row: 3);
       var email = cellsRow?.elementAt(1).value;
-      var regNo = cellsRow?.elementAt(5).value;
+      var regNo = cellsRow?.elementAt(3).value;
       setLoading(true);
       try{
         auth.createUserWithEmailAndPassword(email: email.toString().trim(), password: regNo.toString().trim())

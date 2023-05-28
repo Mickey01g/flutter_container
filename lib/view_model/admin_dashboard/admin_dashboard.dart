@@ -158,7 +158,7 @@ class AdminDashboard extends StatelessWidget {
                   color: Colors.blue,
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const Announcement()));
+                        builder: (context) =>Announcement()));
                   },
                   child: const Text(
                     "Create Announcement",
