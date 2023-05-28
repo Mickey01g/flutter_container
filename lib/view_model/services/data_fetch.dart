@@ -3,9 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:gsheets/gsheets.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 import '../../component/sign_controller.dart';
-
 
 class UserData {
   late String name;
@@ -14,29 +12,19 @@ class UserData {
   late String room;
   late String regNo;
   late String course;
-  late String image;
   UserData(
-      {
-        required this.name,
-        required this.phone,
-        required this.email,
-        required this.room,
-        required this.regNo,
-        required this.course,
-        required this.image,
-      }
-      );
+      {required this.name,
+      required this.phone,
+      required this.email,
+      required this.room,
+      required this.regNo,
+      required this.course});
 }
-final e1=UserData(name: '', phone: '', email: '', room: '', regNo: '', course: '', image: '');
 
+final e1 =
+    UserData(name: '', phone: '', email: '', room: '', regNo: '', course: '');
 
-
-// String _name="";
-// String _email="";
-// int _phone="" as int;
-
-fetch3() async{
-
+fetch3() async {
   const credentials = r'''
   {
    "type": "service_account",
@@ -54,52 +42,51 @@ fetch3() async{
   }
   ''';
   const spreadsheetId = "1XEiR6x2_ipo6BKt5q8AIsiedxuXHhVVfc0uBvBP2940";
-  final CollectionReference contacts=FirebaseFirestore.instance.collection("users");
   final gSheets = GSheets(credentials);
   final ss = await gSheets.spreadsheet(spreadsheetId);
   //getting currentUser
-
   var sheet = ss.worksheetByTitle("description");
-  int rows =sheet!.columnCount.length;
-  try{
-    List<Cell>? cellsRow;
-    for(var i=1; i<rows; i++){
-      cellsRow=await sheet.cells.row(i);
-      var username=cellsRow.elementAt(0).value;
-      var email=cellsRow.elementAt(1).value;
-      var room =cellsRow.elementAt(2).value;
-      var  regNo=cellsRow.elementAt(3).value;
-      var  phone=cellsRow.elementAt(4).value.toString();
-      var course=cellsRow.elementAt(5).value;
-      var image=cellsRow.elementAt(6).value.toString();
+  int column = sheet!.columnCount;
+  var flag=1;
+  List<Cell> cellsRow;
 
-      var currentUser = FirebaseAuth.instance.currentUser;
-      if (kDebugMode) {
-        print(currentUser?.email);
-      }
-      if (currentUser!=null){
-        var fEmail=currentUser.email.toString();
-        if (fEmail==email) {
-            e1.email=fEmail;
-            e1.phone=phone;
-            e1.name=username;
-            e1.room=room;
-            e1.regNo=regNo;
-            e1.course=course;
-            e1.image=image;
+    for (var i = 1; i <= 1000; i++) {
+      cellsRow = await sheet.cells.row(i);
+      if(cellsRow.elementAt(0)!=null) {
+        // print(cellsRow.elementAt(0));
+        // sheet.values.insertValue("value", column: 3, row: 3);
+        var username = cellsRow.elementAt(0).value;
+        var email = cellsRow.elementAt(1).value;
+        var room = cellsRow.elementAt(2).value;
+        var regNo = cellsRow.elementAt(3).value;
+        var phone = cellsRow.elementAt(4).value.toString();
+        var course = cellsRow.elementAt(5).value;
+
+        var currentUser = FirebaseAuth.instance.currentUser;
+        if (currentUser != null) {
+          var fEmail = currentUser.email.toString();
+          // print(fEmail);
+          // print(email);
+
+            if (fEmail == email) {
+              e1.email = fEmail;
+              e1.phone = phone;
+              e1.name = username;
+              e1.room = room;
+              e1.regNo = regNo;
+              e1.course = course;
+              flag=0;
+              break ;
+          }
         }
-        else{
-          SignController.toastMessage("Something Went Wrong");
-        }
       }
-      else{
-        SignController.toastMessage("User Not Found");
+      else {
+        flag=1;
       }
     }
+    if (flag==1){
+      SignController.toastMessage("User Not Found");
+    }
 
-
-  }catch(e){
-    SignController.toastMessage(e.toString());
-  }
 
 }

@@ -1,17 +1,13 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_container/view_model/admin_login/admin_login.dart';
-import 'package:flutter_container/view_model/home/hostel_faculty_page.dart';
-import 'package:flutter_container/pages/news_page.dart';
-import 'package:flutter_container/view_model/student_login/sLoginPage.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_container/utils/routes_name.dart';
 import 'package:flutter_container/view_model/drawer/drawer.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-
-
+import '../../component/sign_controller.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -42,11 +38,13 @@ AlertDialog buildExitDialog(BuildContext context) {
     actions: <Widget>[
       TextButton(
         onPressed: () => Navigator.of(context).pop(false),
-        child: Text('No'),
+        child: const Text('No'),
       ),
       TextButton(
-        onPressed: () => Navigator.of(context).pop(true),
-        child: Text('Yes'),
+        onPressed:() async{
+      SystemNavigator.pop();
+      },
+        child: const Text('Yes'),
       ),
     ],
   );
@@ -55,30 +53,33 @@ class _HomePageState extends State<HomePage> {
   final formUrl = "https://csjmu.ac.in/wp-content/uploads/docs/2021/09/Hostel-application-FORM.pdf";
   final hostelRuleUrl ="https://csjmu.ac.in/wp-content/uploads/docs/2022/09/Hostel-council-PDF-file.pdf";
 
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => onWillPop(context),
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.red,
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title: const Text('Hostel App'),
+          title:  const Center(child: Text('Hostel App')),
         ),
         drawer: MyDrawer(),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
+        body: SafeArea(
           child: Center(
-            child: SizedBox(
-              width: 400,
+            child: Container(
+              decoration:BoxDecoration(
+                color: Colors.black.withOpacity(0.2),
+              ),
+              width:double.infinity,
+              height:MediaQuery.sizeOf(context).height*1,
               // color: Colors.amber,
               child: Column(
                 children: [
                   //================Image container start from here====================
                   SizedBox(
-                    width: 400,
+                    width:double.infinity,
                     height: 250,
                     child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
@@ -86,16 +87,12 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         children: [
                           //==========first image container=============
-                          Image.asset(
-                            'assets/images/Boys-Hostel-2.jpg', fit: BoxFit.fill,),
+                          Image.asset('assets/images/Boys-Hostel-2.jpg', fit: BoxFit.fill,),
                           //=============second image container============
-                          Image.asset(
-                              'assets/images/Kaveri-Girls-Hostel.jpg'),
+                          Image.asset('assets/images/Kaveri-Girls-Hostel.jpg',fit: BoxFit.fill),
                           //=========third image container=============
-                          Image.asset(
-                              'assets/images/Triveni-Girls-Hostel.jpg'),
-                          Image.asset(
-                              'assets/images/Swarn-Jayant-Hostel.png')
+                          Image.asset('assets/images/Triveni-Girls-Hostel.jpg',fit: BoxFit.fill),
+                          Image.asset('assets/images/Swarn-Jayant-Hostel.png',fit: BoxFit.fill)
                         ],
                       ),
                     ),
@@ -109,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       // ======= student login here ==========
                       ElevatedButton(onPressed: () {
-                        Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context)=>SLoginPage()), (route) => route.isFirst);
+                        Navigator.pushNamedAndRemoveUntil(context, RouteName.studentlogin, (route) =>route.isFirst);
                       },
                         style: TextButton.styleFrom(
                             minimumSize: const Size(140, 80)),
@@ -118,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(width: 10,),
                       // ======= admin login here =============
                       ElevatedButton(onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const AdminLoginPage()));
+                        Navigator.pushReplacementNamed(context,RouteName.adminlogin);
                       }, style: TextButton.styleFrom(
                           minimumSize: const Size(140, 80)), child: const Text("Admin Login"),
                       ),
@@ -132,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                   Column(
                     children: [
                       ElevatedButton(onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> NewsPage()));
+                        Navigator.pushReplacementNamed(context,RouteName.newspage);
                       }, style: TextButton.styleFrom(
                             minimumSize: const Size(290, 60)),
                         child: const Text("Announcements"),
@@ -140,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(height: 10,),
                       //======faculty button start form here============
                       ElevatedButton(onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const HostelFacultyPage()));
+                        Navigator.pushReplacementNamed(context,RouteName.hostelfaculty);
                       },style: TextButton.styleFrom(minimumSize: const Size(290, 60)),
                         child: const Text("Hostel Faculty"),
                       ),
@@ -185,17 +182,10 @@ class _HomePageState extends State<HomePage> {
         name: "HOSTEL_FORM.pdf",
         onProgress: (String? filename, double process) {
           // print("FILE $filename HAS PROGRESS $process");
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("$filename HAS PROGRESS $process"),
-                action:SnackBarAction(
-                  label:"Ok", onPressed: () { null; },
-                ),),
-              );
+          SignController.toastMessage("$filename HAS PROGRESS $process");
         },
         onDownloadCompleted: (String path) {
-          if (kDebugMode) {
-            print("File downloaded $path");
-          }
+          SignController.toastMessage("File downloaded $path");
         },
         onDownloadError: (String error) {
           if (kDebugMode) {

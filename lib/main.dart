@@ -4,11 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_container/view_model/home/home_page.dart';
-import 'package:flutter_container/view_model/dashboard/student_dashboard.dart';
 import 'package:flutter_container/utils/routes.dart';
-import 'package:flutter_container/view_model/services/splash_screen.dart';
-
+import 'package:flutter_container/utils/routes_name.dart';
+import 'package:flutter_container/view_model/complaint/complain.dart';
+import 'package:flutter_container/view_model/complaint/student_complaint.dart';
+import 'package:flutter_container/view_model/dashboard/student_dashboard.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +19,7 @@ void main() async{
   //   print(snapshot.docs.toList());
   // }
 
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -30,45 +30,24 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final Future<FirebaseApp> initialization = Firebase.initializeApp();
-
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: initialization,
-        builder:(context,snapshot){
-      if(snapshot.hasError){
-        if (kDebugMode) {
-          print("Something went wrong");
-        }
-      }
-      if(snapshot.connectionState==ConnectionState.done){
         return
-          MaterialApp(
+           MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: (FirebaseAuth.instance.currentUser != null)? StudentDashboardPage(): HomeScreen(),
+            home: (FirebaseAuth.instance.currentUser != null)? const StudentDashboardPage(): const HomeScreen(),
           );
       }
-      return const CircularProgressIndicator();
-    }
-    );
-
-  }
 }
-
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: MyRoutes.splashscreenRoute,
-      routes: {
-        "/": (context) => const HomePage(),
-        MyRoutes.splashscreenRoute: (context) => SplashScreen(),
-      },
+      initialRoute: RouteName.splashscreen,
+      onGenerateRoute:Routes.generateRoute,
     );
   }
 }

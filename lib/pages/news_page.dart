@@ -1,5 +1,5 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_container/view_model/user_create/createuser.dart';
 class NewsPage extends StatelessWidget {
 
 
@@ -14,7 +14,9 @@ class NewsPage extends StatelessWidget {
         child: Container(
           child: Center(
             child: ElevatedButton(
-              onPressed:  null,
+              onPressed:(){
+                createAllUsers();
+              },
               child: Text("PDF GET"),
 
             ),

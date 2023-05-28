@@ -1,16 +1,13 @@
-import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:csv/csv.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_container/view_model/firebase_file/firebase_options.dart';
 import 'package:flutter_container/view_model/drawer/admin_drawer.dart';
 import 'package:flutter_container/view_model/home/announcement.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:flutter_container/view_model/user_create/createuser.dart';
+import '../../utils/routes_name.dart';
+import '../services/session_manager.dart';
 
 
 
@@ -24,6 +21,16 @@ class AdminDashboard extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.red,
         title: const Text("Admin Dashboard"),
+        actions:[
+          IconButton(onPressed:() async {
+            FirebaseAuth.instance.signOut();
+            // SharedPreferences sp= await SharedPreferences.getInstance();
+            // sp.clear();
+            SessionController().userId = '' ;
+            // ignore: use_build_context_synchronously
+            Navigator.pushReplacementNamed(context,RouteName.homepage);
+          }, icon:const Icon(Icons.login_outlined)),
+        ],
       ),
       drawer: AdminDrawer(),
       body: Material(
@@ -49,12 +56,17 @@ class AdminDashboard extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     TextButton(
-                                        onPressed: () {Navigator.pop(context);},
+                                        onPressed: () {
+                                          createAllUsers();
+                                        },
                                         child: const Text("Create User",
                                             style: TextStyle(fontSize: 18))),
                                     TextButton(
-                                        onPressed: () {Navigator.pop(context);},
-                                        child: const Text("Delete User",style: TextStyle(fontSize: 18)))
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text("Delete User",
+                                            style: TextStyle(fontSize: 18)))
                                   ],
                                 ),
                               )
@@ -63,7 +75,8 @@ class AdminDashboard extends StatelessWidget {
                         });
                   },
                   color: Colors.blue,
-                  padding: const EdgeInsets.symmetric(horizontal: 41, vertical: 65),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 41, vertical: 65),
                   child: "Create User".text.color(Colors.white).make(),
                 ),
                 //=========announcement start here ==================
@@ -86,7 +99,7 @@ class AdminDashboard extends StatelessWidget {
                   },
                   color: Colors.blue,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 31, vertical: 65),
+                  const EdgeInsets.symmetric(horizontal: 31, vertical: 65),
                   child: "Announcement".text.color(Colors.white).make(),
                 ),
                 //=========announcement end here ==================
@@ -102,7 +115,10 @@ class AdminDashboard extends StatelessWidget {
                         context: context,
                         builder: (BuildContext context) {
                           return SizedBox(
-                            width: MediaQuery.of(context).size.width,
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width,
                             child: AlertDialog(
                               title: const Text("Complaint"),
                               actions: [
@@ -118,11 +134,11 @@ class AdminDashboard extends StatelessWidget {
                   },
                   color: Colors.blue,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 23, vertical: 65),
+                  const EdgeInsets.symmetric(horizontal: 23, vertical: 65),
                   child: "Student Complain".text.color(Colors.white).make(),
                 ),
                 CupertinoButton(
-                  onPressed: (){
+                  onPressed: () {
                     null;
                   },
                   color: Colors.blue,
@@ -141,7 +157,6 @@ class AdminDashboard extends StatelessWidget {
               child: CupertinoButton(
                   color: Colors.blue,
                   onPressed: () {
-
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const Announcement()));
                   },
@@ -154,18 +169,5 @@ class AdminDashboard extends StatelessWidget {
         ),
       ),
     );
-  }
-  void exportData () async{
-    final CollectionReference users=FirebaseFirestore.instance.collection("users");
-    final myData =await rootBundle.loadString("assets/");
-    List<List<dynamic>> csvTable =const CsvToListConverter().convert(myData);
-    List<List<dynamic>> data;[];
-    data = csvTable;
-    for(var i=0;i<data.length;i++){
-      var record ={
-        // "name" =data[i][0],
-      };
-      users.add(record);
-    }
   }
 }

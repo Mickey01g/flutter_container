@@ -1,13 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_container/view_model/home/home_page.dart';
 import 'package:flutter_container/view_model/profile/student_profile.dart';
-import 'package:path/path.dart';
 import 'package:velocity_x/velocity_x.dart';
+import '../services/data_fetch.dart';
+
 class StudentDrawer extends StatelessWidget {
   const StudentDrawer({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +15,11 @@ class StudentDrawer extends StatelessWidget {
         margin: const EdgeInsets.only(top: 0),
         child: ListView(
           children: [
-
-            const DrawerHeader(
+             DrawerHeader(
               padding: EdgeInsets.zero,
               child: UserAccountsDrawerHeader(
                 margin: EdgeInsets.zero,
-                accountName: Text("Mayank Gupta",textScaleFactor:1.6,), accountEmail: null,
+                accountName: Text(e1.name,textScaleFactor:1.6,), accountEmail: Text(e1.email),
 
               ),
             ),

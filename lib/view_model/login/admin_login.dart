@@ -1,41 +1,32 @@
-
-import 'dart:math';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_container/component/inputfield.dart';
-import 'package:flutter_container/component/roundbutton.dart';
-import 'package:flutter_container/view_model/dashboard/student_dashboard.dart';
-import 'package:flutter_container/view_model/student_login/login_controller.dart';
-import 'package:gsheets/gsheets.dart';
+import 'package:flutter_container/utils/routes_name.dart';
+import 'package:flutter_container/view_model/dashboard/admin_dashboard.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../component/inputfield.dart';
+import '../../component/roundbutton.dart';
 import '../../component/sign_controller.dart';
-import '../services/data_fetch.dart';
+import 'login_controller.dart';
 
+class AdminLoginPage extends StatefulWidget {
+  const AdminLoginPage({super.key});
 
-
-class SLoginPage extends StatefulWidget {
-  const SLoginPage({super.key});
   @override
-  State<SLoginPage> createState() => _SLoginPageState();
+  State<AdminLoginPage> createState() => _AdminLoginPageState();
 }
 
-class _SLoginPageState extends State<SLoginPage> {
-
-
-
+class _AdminLoginPageState extends State<AdminLoginPage> {
   Future<FirebaseApp> initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
     return firebaseApp;
   }
   final formKey = GlobalKey<FormState>();
-
+  final auth=FirebaseAuth.instance;
 
   void login() async{
     String email =emailController.text.trim();
@@ -48,8 +39,7 @@ class _SLoginPageState extends State<SLoginPage> {
         UserCredential userCredential=await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
         if(userCredential.user != null){
           // ignore: use_build_context_synchronously
-          Navigator.pushAndRemoveUntil(context ,MaterialPageRoute(builder: (context)=>StudentDashboardPage()), (route) => route.isFirst);
-          // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>StudentDashboardPage()));
+          Navigator.pushReplacementNamed(context,RouteName.admindashboard);
         }
       }on FirebaseAuthException catch(e){
         SignController.toastMessage(e.code.toString());
@@ -119,7 +109,7 @@ class _SLoginPageState extends State<SLoginPage> {
                                 const Column(
                                   children: [
                                     Padding(padding: EdgeInsets.only(top: 20),
-                                      child: Text("Student Login", style: TextStyle(fontSize: 30),),
+                                      child: Text("Admin Login", style: TextStyle(fontSize: 30),),
                                     ),
                                   ],
                                 ),
@@ -137,7 +127,8 @@ class _SLoginPageState extends State<SLoginPage> {
                                             key: formKey,
                                             child: Column(
                                               children: [
-                                                InputTextField(myController: emailController,
+                                                InputTextField(
+                                                    myController: emailController,
                                                     focusNode: emailFocusNode,
                                                     onFieldSubmitValue:(value){
                                                       SignController.fieldFocus(context, emailFocusNode, passwordFocusNode);
@@ -146,7 +137,7 @@ class _SLoginPageState extends State<SLoginPage> {
                                                     obscureText: false,
                                                     hint: "Email",
                                                     onValidator:(value){
-                                                    return value.isEmpty ? 'Enter email' :null;
+                                                      return value.isEmpty ? 'Enter email' :null;
                                                     }),
                                                 const SizedBox(height: 10,),
                                                 //=======Login Password input here=========
@@ -160,23 +151,29 @@ class _SLoginPageState extends State<SLoginPage> {
                                                       return value.isEmpty ? 'Enter password' :null;
                                                     }),
                                                 const SizedBox(height: 50,),
-                                               ChangeNotifierProvider(
-                                                 create:(_) => LoginContorller(),
-                                                 child: Consumer<LoginContorller>(
-                                                   builder: (context,provider,child){
-                                                     return  RoundButton(
-                                                       title: 'Login',
-                                                       loading: provider.loading,
-                                                       onPress: () {
-                                                         if(formKey.currentState!.validate()) {
-                                                           provider.login(context, emailController.text, passwordController.text);
-                                                           fetch3();
-                                                         }
-                                                       },
-                                                     );
-                                                   },
-                                                 ),
-                                               )
+                                                ChangeNotifierProvider(
+                                                  create:(_) => LoginContorller(),
+                                                  child: Consumer<LoginContorller>(
+                                                    builder: (context,provider,child){
+                                                      return  RoundButton(
+                                                        title: 'Login',
+                                                        loading: provider.loading,
+                                                        onPress: () async {
+                                                          if(formKey.currentState!.validate()) {
+                                                            provider.login(context, emailController.text, passwordController.text);
+                                                            SharedPreferences sp= await SharedPreferences.getInstance();
+                                                            sp.setString('email', emailController.text.toString());
+                                                            sp.setString('password',passwordController.text.toString());
+                                                            sp.setBool('isLogin',true);
+                                                            sp.setString('userType','admin');
+                                                            // ignore: use_build_context_synchronously
+                                                            // auth.createUserWithEmailAndPassword(email:emailController.text.trim(), password:passwordController.text.trim());
+                                                          }
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                )
                                               ],
                                             ),
                                           ),
@@ -199,9 +196,3 @@ class _SLoginPageState extends State<SLoginPage> {
     );
   }
 }
-
-
-
-
-
-

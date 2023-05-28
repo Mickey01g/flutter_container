@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_container/utils/routes.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_container/utils/routes_name.dart';
 import 'package:flutter_container/view_model/complaint/student_complaint.dart';
 import 'package:flutter_container/view_model/drawer/student_drawer.dart';
+import 'package:flutter_container/view_model/home/home_page.dart';
 import 'package:flutter_container/view_model/services/session_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class StudentDashboardPage extends StatefulWidget {
@@ -37,11 +40,13 @@ class _StudentDashboardPageState extends State<StudentDashboardPage> {
       actions: <Widget>[
         TextButton(
           onPressed: () => Navigator.of(context).pop(false),
-          child: Text('No'),
+          child: const Text('No'),
         ),
         TextButton(
-          onPressed: () => Navigator.of(context).pop(true),
-          child: Text('Yes'),
+          onPressed: () async{
+            SystemNavigator.pop();
+          },
+          child: const Text('Yes'),
         ),
       ],
     );
@@ -97,12 +102,13 @@ class _StudentDashboardPageState extends State<StudentDashboardPage> {
           appBar: AppBar(
             title: const Text("Student Dashboard"),
             actions:[
-              IconButton(onPressed:(){
-                FirebaseAuth auth =FirebaseAuth.instance;
-                auth.signOut().then((value){
+              IconButton(onPressed:() async {
+                FirebaseAuth.instance.signOut();
+                  SharedPreferences sp= await SharedPreferences.getInstance();
+                  sp.clear();
                   SessionController().userId = '' ;
-                  Navigator.pop(context, MyRoutes.homeRoute);
-                });
+                  // ignore: use_build_context_synchronously
+                  Navigator.pushNamedAndRemoveUntil(context, RouteName.homepage, (route) => route.isFirst);
               }, icon:const Icon(Icons.login_outlined)),
             ],
           ),
@@ -119,7 +125,9 @@ class _StudentDashboardPageState extends State<StudentDashboardPage> {
                         child: Row(
                           children: [
                             InkWell(
-                              onTap: null,
+                              onTap: (){
+                                Navigator.pushNamed(context, RouteName.complaint);
+                              },
                               child: Card(
                                 color: Colors.blue.shade300,
                                 child: const SizedBox(
@@ -173,7 +181,7 @@ class _StudentDashboardPageState extends State<StudentDashboardPage> {
                     ),
                     const Spacer(),
                     CupertinoButton(onPressed: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder:(context)=>const MyComplaint()));
+                      Navigator.pushNamed(context,RouteName.mycomplaint);
                     }, color: Colors.blue,child: const Text("Create Complaint",style:TextStyle(color: Colors.white),textScaleFactor: 1,textAlign: TextAlign.center,))
                   ],
                 ),
