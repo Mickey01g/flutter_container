@@ -1,10 +1,5 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
-import 'package:flutter_container/view_model/admin_dashboard/admin_dashboard.dart';
-import 'package:flutter_container/view_model/dashboard/student_dashboard.dart';
-import 'package:flutter_container/view_model/home/home_page.dart';
 import 'package:flutter_container/utils/routes_name.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class SplashScreen extends StatefulWidget{
@@ -15,6 +10,7 @@ class SplashScreen extends StatefulWidget{
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  SplashScreen services=SplashScreen();
   @override
   void initState() {
     super.initState();

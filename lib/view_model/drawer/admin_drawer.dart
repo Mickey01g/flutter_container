@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_container/utils/routes_name.dart';
 class AdminDrawer extends StatelessWidget {
 
   @override
@@ -23,7 +24,9 @@ class AdminDrawer extends StatelessWidget {
                color:Colors.amber,
              ),
              title: Text("Profile",textScaleFactor: 1.2,style: TextStyle(color: Colors.white),),
-             onTap:null
+             onTap:(){
+               Navigator.pushNamed(context,RouteName.adminprofile);
+             }
            ),
             // ==========About section start here===========
            ListTile(

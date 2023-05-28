@@ -12,5 +12,6 @@ class RouteName{
   static const String mycomplaint='student_complaint';
   static const String newspage='news_page';
   static const String createuser='create_user';
+  static const String adminprofile="admin_profile";
 
 }

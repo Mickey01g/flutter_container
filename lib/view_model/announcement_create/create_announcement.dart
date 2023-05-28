@@ -2,6 +2,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_container/component/sign_controller.dart';
+import 'package:flutter_container/utils/routes_name.dart';
 import 'package:flutter_container/view_model/login/sLoginPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gsheets/gsheets.dart';
@@ -66,7 +67,6 @@ import 'package:intl/intl.dart';
 class DoGet {
 
   void createAnnouncement(String data) async {
-
     FirebaseAuth auth = FirebaseAuth.instance;
     bool _loading = false;
     setLoading(bool value) {
@@ -98,12 +98,13 @@ class DoGet {
     // sheet?.values.insertValue(data, column: sheet.cells.lastRow as int, row: 0)
     for (var i = 1; i <= 10; i++) {
       cellsRow = await sheet?.cells.row(i);
-      if (cellsRow?.elementAtOrNull(1)==null) {
+      if (cellsRow?.elementAtOrNull(1) == null) {
         // print(cellsRow.elementAt(0));
         cellsRow = await sheet?.cells.row(i);
         sheet?.values.insertValue(data, column: 2, row: i);
-        var date= DateTime.now();
-        sheet?.values.insertValue(DateFormat('yyyy-MM-dd').format(date), column: 3, row: i);
+        var date = DateTime.now();
+        sheet?.values.insertValue(DateFormat('yyyy-MM-dd kk:mm').format(date), column: 3, row: i);
+        sheet?.values.insertValue(DateFormat('kk:mm').format(date), column: 4, row: i);
 
         break;
 
@@ -113,12 +114,15 @@ class DoGet {
 
 
       }
-      else{
+      else {
         null;
       }
     }
   }
-
 }
+
+
+
+
 
 

@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_container/component/sign_controller.dart';
-import 'package:flutter_container/view_model/dashboard/student_dashboard.dart';
 
 import '../services/session_manager.dart';
 import '../student_dashboard/student_dashboard.dart';

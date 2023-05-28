@@ -7,6 +7,7 @@ import 'package:flutter_container/view_model/home/home_page.dart';
 import 'package:flutter_container/view_model/home/hostel_faculty_page.dart';
 import 'package:flutter_container/view_model/login/admin_login.dart';
 import 'package:flutter_container/view_model/login/sLoginPage.dart';
+import 'package:flutter_container/view_model/profile/admin_profile.dart';
 import 'package:flutter_container/view_model/profile/student_profile.dart';
 import 'package:flutter_container/view_model/user_create/create_user.dart';
 import '../view_model/services/splash_screen.dart';
@@ -43,6 +44,8 @@ class Routes{
         return MaterialPageRoute(builder: (context)=>NewsPage());
       case RouteName.createuser:
         return MaterialPageRoute(builder: (context)=>const CreateUser());
+      case RouteName.adminprofile:
+        return MaterialPageRoute(builder: (context)=>const AdminProfile());
 
       default:
         return MaterialPageRoute(builder: (context){

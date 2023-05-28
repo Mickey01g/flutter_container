@@ -38,12 +38,14 @@ class _SLoginPageState extends State<SLoginPage> {
     }
     else{
       try{
-        UserCredential userCredential=await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+        UserCredential userCredential=await FirebaseAuth.instance.
+        signInWithEmailAndPassword(email: email, password: password);
         if(userCredential.user != null){
           // ignore: use_build_context_synchronously
           Navigator.pushReplacementNamed(context,RouteName.studentdashboard);
         }
       }on FirebaseAuthException catch(e){
+        debugPrint(e.toString());
         Fluttertoast.showToast(msg: e.toString());
       }
     }
@@ -57,8 +59,8 @@ class _SLoginPageState extends State<SLoginPage> {
   void dispose(){
     // TODO: implement dispose
     super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
+    emailController.clear();
+    passwordController.clear();
     emailFocusNode.dispose();
     passwordFocusNode.dispose();
   }

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_container/utils/routes_name.dart';
 import 'package:flutter_container/view_model/drawer/student_drawer.dart';
 import 'package:flutter_container/view_model/services/session_manager.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'complaint/student_complaint.dart';
@@ -103,12 +104,16 @@ class _StudentDashboardPageState extends State<StudentDashboardPage> {
             title: const Text("Student Dashboard"),
             actions:[
               IconButton(onPressed:() async {
-                FirebaseAuth.instance.signOut();
+                FirebaseAuth.instance.signOut().then((value) async {
                   SharedPreferences sp= await SharedPreferences.getInstance();
                   sp.clear();
                   SessionController().userId = '' ;
                   // ignore: use_build_context_synchronously
                   Navigator.of(context).pop();
+                }).onError((error, stackTrace){
+                 Fluttertoast.showToast(msg: error.toString());
+                });
+
               }, icon:const Icon(Icons.login_outlined)),
             ],
           ),

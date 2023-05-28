@@ -12,8 +12,10 @@ class HostelFacultyPage extends StatelessWidget {
         title:Center(child: "Hostel Faculty".text.letterSpacing(2).scale(1.4).make()),
       ),
       body:SafeArea(
-        child:Container(
-          child:Image.asset("assets/images/hostel-staff.jpg",fit: BoxFit.fill,),
+        child:Center(
+          child: Padding(
+              padding:const EdgeInsets.symmetric(horizontal: 10),
+              child: Image.asset("assets/images/hostel-staff.jpg",width: 400,height: 600,)),
         )
       ),
     );

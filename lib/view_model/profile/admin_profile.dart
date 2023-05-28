@@ -1,16 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_container/view_model/login/admin_login.dart';
 import 'package:flutter_container/view_model/services/data_fetch.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../utils/routes_name.dart';
 
-class StudentProfile extends StatefulWidget {
-  const StudentProfile({Key? key}) : super(key: key);
+class AdminProfile extends StatefulWidget {
+  const AdminProfile({Key? key}) : super(key: key);
 
   @override
-  State<StudentProfile> createState() => _StudentProfileState();
+  State<AdminProfile> createState() => _AdminProfileState();
 }
-class _StudentProfileState extends State<StudentProfile> {
+class _AdminProfileState extends State<AdminProfile> {
 
   final Stream<QuerySnapshot> userData =
   FirebaseFirestore.instance.collection("users").snapshots();
@@ -60,7 +61,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     ListTile(
                       leading: Icon(Icons.person_outline),
                       title: "Username".text.make(),
-                      trailing: Text(e1.name),
+                      trailing: Text(admin.name),
                     ),
                     ListTile(
                       leading: Icon(Icons.bedroom_child_outlined),
@@ -80,7 +81,7 @@ class _StudentProfileState extends State<StudentProfile> {
                   ],
                 ),
               )
-                  // ReuseRow(title:"Username",value: e1.name,iconData: Icons.person_outline,),
+              // ReuseRow(title:"Username",value: e1.name,iconData: Icons.person_outline,),
             ],
           ),
         ),

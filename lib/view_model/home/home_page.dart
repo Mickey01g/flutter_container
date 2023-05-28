@@ -1,11 +1,10 @@
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_container/utils/routes_name.dart';
 import 'package:flutter_container/view_model/drawer/drawer.dart';
-import 'package:flutter_file_downloader/flutter_file_downloader.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 import '../../component/sign_controller.dart';
 
@@ -16,6 +15,7 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
 Future<bool> onWillPop(BuildContext context) async {
   bool? exitResult = await showDialog(
     context: context,
@@ -52,6 +52,7 @@ AlertDialog buildExitDialog(BuildContext context) {
 class _HomePageState extends State<HomePage> {
   final formUrl = "https://csjmu.ac.in/wp-content/uploads/docs/2021/09/Hostel-application-FORM.pdf";
   final hostelRuleUrl ="https://csjmu.ac.in/wp-content/uploads/docs/2022/09/Hostel-council-PDF-file.pdf";
+
 
   @override
   Widget build(BuildContext context) {
@@ -149,12 +150,17 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           //======= hostel form here===========
-                          ElevatedButton(onPressed:formDownload, style: TextButton
+                          ElevatedButton(onPressed:(){
+                            formDownload();
+                          }, style: TextButton
                                 .styleFrom(minimumSize: const Size(140, 80)),
-                            child: const Text("Hostel Form"),),
+                            child: const Text("Hostel Form"),
+                          ),
                           const SizedBox(width: 10,),
                           // ========= rules button here ===============
-                          ElevatedButton(onPressed:hostelRule,
+                          ElevatedButton(onPressed:(){
+                                 ruleDownload();
+                          },
                             style: TextButton.styleFrom(
                                 minimumSize: const Size(140, 80)),
                             child: const Text("Hostel Rule"),),
@@ -175,16 +181,14 @@ class _HomePageState extends State<HomePage> {
 
 // DOWNLOAD HOSTEL_FORM PDF
   void formDownload() async {
-    var status = await Permission.storage.request();
-    if (status == PermissionStatus.granted) {
       FileDownloader.downloadFile(
         url: formUrl,
         name: "HOSTEL_FORM.pdf",
         onProgress: (String? filename, double process) {
-          // print("FILE $filename HAS PROGRESS $process");
           SignController.toastMessage("$filename HAS PROGRESS $process");
         },
         onDownloadCompleted: (String path) {
+
           SignController.toastMessage("File downloaded $path");
         },
         onDownloadError: (String error) {
@@ -193,77 +197,29 @@ class _HomePageState extends State<HomePage> {
           }
         },
       );
-    }
-    else {
-      if (kDebugMode) {
-        print("PERMISSION is NOT GRANTED");
-      }
-    }
+
   }
-}
-
-
-//hostel rule
-void hostelRule() async {
-  var status = await Permission.storage.request();
-  if (status == PermissionStatus.granted) {
-    const hostelRuleUrl="https://csjmu.ac.in/wp-content/uploads/docs/2022/09/Hostel-council-PDF-file.pdf";
+//  Hostel Rule download
+  void ruleDownload() async {
     FileDownloader.downloadFile(
       url: hostelRuleUrl,
-      name: "HOSTEL_FORM.pdf",
+      name: "HOSTEL_Rule.pdf",
       onProgress: (String? filename, double process) {
-        try{
-          if (kDebugMode) {
-            print("FILE $filename HAS PROGRESS $process");
-          }
-        }
-        catch(e){
-          if (kDebugMode) {
-            print(e.toString());
-          }
-        }
+        SignController.toastMessage("$filename HAS PROGRESS $process");
       },
       onDownloadCompleted: (String path) {
-       try{
-         if (kDebugMode) {
-           AlertDialog(
-             title:"Download Path".text.make(),
-             actions: [
-               "Close".text.make()
-             ],
-           );
-           // print("File downloaded $path");
-         }
-       }catch(e){
-         if (kDebugMode) {
-           print(e.toString());
-         }
-       }
+
+        SignController.toastMessage("File downloaded $path");
       },
       onDownloadError: (String error) {
-       try{
-         if (kDebugMode) {
-           print("DOWNLOAD ERROR $error");
-         }
-       }
-       catch(e){
-         if (kDebugMode) {
-           print(e.toString());
-         }
-       }
+        if (kDebugMode) {
+          print("DOWNLOAD ERROR $error");
+        }
       },
     );
-  }
-  else {
-    try{
-      if (kDebugMode) {
-        print("PERMISSION is NOT GRANTED");
-      }
-    }
-    catch(e){
-      if (kDebugMode) {
-        print(e.toString());
-      }
-    }
+
   }
 }
+
+
+
