@@ -87,7 +87,7 @@ class _StudentProfileState extends State<StudentProfile> {
                         child: Container(
                           width: 150,
                           height: 40,
-                          color: Colors.blue,
+                          decoration: BoxDecoration,
                           child: Center(child: Text("Back")),
                         ),
                       ),
