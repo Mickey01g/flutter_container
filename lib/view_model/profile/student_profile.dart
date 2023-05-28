@@ -87,7 +87,10 @@ class _StudentProfileState extends State<StudentProfile> {
                         child: Container(
                           width: 150,
                           height: 40,
-                          decoration: ,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.blue,
+                          ),
                           child: Center(child: Text("Back")),
                         ),
                       ),
