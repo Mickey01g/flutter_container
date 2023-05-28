@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_container/view_model/drawer/admin_drawer.dart';
 import 'package:flutter_container/view_model/admin_dashboard/create_announcement.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter_container/view_model/user_create/createuser.dart';
 import '../../utils/routes_name.dart';
@@ -65,7 +66,7 @@ class AdminDashboard extends StatelessWidget {
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                        child: const Text("Delete User",
+                                        child: const Text("Cancel",
                                             style: TextStyle(fontSize: 18)))
                                   ],
                                 ),
@@ -82,21 +83,7 @@ class AdminDashboard extends StatelessWidget {
                 //=========announcement start here ==================
                 CupertinoButton(
                   onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text("Announcement"),
-                            actions: [
-                              TextButton(
-                                  onPressed: () {
-
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text("Close"))
-                            ],
-                          );
-                        });
+                   Navigator.pushNamed(context,RouteName.announcementview);
                   },
                   color: Colors.blue,
                   padding:
@@ -112,26 +99,7 @@ class AdminDashboard extends StatelessWidget {
               children: [
                 CupertinoButton(
                   onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SizedBox(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width,
-                            child: AlertDialog(
-                              title: const Text("Complaint"),
-                              actions: [
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text("Close"))
-                              ],
-                            ),
-                          );
-                        });
+                    Navigator.pushNamed(context,RouteName.globalcomplain);
                   },
                   color: Colors.blue,
                   padding:

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_container/utils/routes_name.dart';
 import 'package:flutter_container/view_model/drawer/drawer.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import '../../component/sign_controller.dart';
 
@@ -63,7 +64,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.red,
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title:  const Center(child: Text('Hostel App')),
+          title:"Hostel App".text.scale(1.4).letterSpacing(1).make(), 
         ),
         drawer: MyDrawer(),
         body: SafeArea(

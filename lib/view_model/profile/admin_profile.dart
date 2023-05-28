@@ -18,7 +18,8 @@ class _AdminProfileState extends State<AdminProfile> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: 'Profile'.text.make(),
+          title: 'Profile'.text.letterSpacing(1).scale(1.4).make(),
+          automaticallyImplyLeading:false,
         ),
         body: Padding(
           padding: EdgeInsets.only(top:28),
@@ -35,7 +36,7 @@ class _AdminProfileState extends State<AdminProfile> {
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: Colors.black,
-                      width: 2,
+                      width: 1,
                     ),
                   ),
                   child: ClipRRect(
@@ -44,28 +45,60 @@ class _AdminProfileState extends State<AdminProfile> {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
-              Container(
-                color: Colors.grey,
+              const SizedBox(height: 5,),
+              SizedBox(
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height/1.5,
+                height: MediaQuery.of(context).size.height/1.6,
                 child: Column(
                   children: [
                     const SizedBox(height: 30,),
-                    Center(child: Text(admin.role,style:TextStyle(),textScaleFactor:1.5,),),
+                    Center(child: Text(admin.role,style:const TextStyle(),textScaleFactor:1.6),),
                     // Divider(color: Colors.black.withOpacity(2),),
-                    SizedBox(height: 30,),
+                    const SizedBox(height: 20,),
+                       const Divider(
+                        height: 2,
+                        thickness: 1,
+                        color: Colors.black,
+                      ),
                     ListTile(
-                      leading: Icon(Icons.person_outline),
-                      title: "Username".text.make(),
-                      trailing: Text(admin.name),
+                      leading: const Icon(Icons.person_outline),
+                      title: "Username".text.scale(1.1).make(),
+                      trailing: Text(admin.name,style:const TextStyle(),textScaleFactor:1.1),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Divider(
+                        height: 2,
+                        color: Colors.black,
+                      ),
                     ),
                     ListTile(
-                      leading: Icon(Icons.bedroom_child_outlined),
-                      title: "Contact".text.make(),
-                      trailing: Text(admin.phone),
+                      leading: const Icon(Icons.bedroom_child_outlined),
+                      title: "Contact".text.scale(1.1).make(),
+                      trailing: Text(admin.phone,style:TextStyle(),textScaleFactor:1.1),
                     ),
-
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Divider(
+                        height: 2,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Spacer(),
+                    InkWell(
+                      onTap: (){
+                        Navigator.of(context).pop();
+                      },
+                        child: Container(
+                          width: 150,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.blue,
+                          ),
+                          child: const Center(child: Text("Back")),
+                        ),
+                    ),
 
                   ],
                 ),

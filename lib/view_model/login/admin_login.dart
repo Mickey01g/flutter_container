@@ -188,11 +188,19 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                                                       return value.isEmpty ? 'Enter password' :null;
                                                     }),
                                                 const SizedBox(height: 50,),
-                                                ElevatedButton(
-                                                    onPressed: (){
+                                                InkWell(
+                                                    onTap: (){
                                                       login();
                                                     },
-                                                    child:"Login".text.make(),
+                                                    child:Container(
+                                                      width: 360,
+                                                      height: 50,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.blue,
+                                                        borderRadius: BorderRadius.circular(30)
+                                                      ),
+                                                      child:Center(child: Text("Login",textScaleFactor: 1.6,)),
+                                                    )
                                                 ),
                                               ],
                                             ),

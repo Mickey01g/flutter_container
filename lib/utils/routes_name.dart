@@ -1,3 +1,5 @@
+import 'dart:async';
+
 class RouteName{
   static const String homepage='home_page';
   static const String splashscreen='splash_screen';
@@ -16,5 +18,7 @@ class RouteName{
   static const String aboutpage="about_page";
   static const String trackcomplain="track_complain";
   static const String announcementview="announcement_view";
+  static const String complainview="complain_view";
+  static const String globalcomplain="globalcomplain";
 
 }

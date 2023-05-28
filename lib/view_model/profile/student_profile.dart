@@ -20,7 +20,8 @@ class _StudentProfileState extends State<StudentProfile> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: 'Profile'.text.make(),
+          title: 'Profile'.text.letterSpacing(1).scale(1.4).make(),
+          automaticallyImplyLeading: false,
         ),
         body: Padding(
           padding: EdgeInsets.only(top:31),
@@ -37,7 +38,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: Colors.black,
-                      width: 2,
+                      width: 1,
                     ),
                   ),
                   child: ClipRRect(
@@ -48,34 +49,68 @@ class _StudentProfileState extends State<StudentProfile> {
               ),
               const SizedBox(height: 20,),
               Container(
-                color: Colors.grey,
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height/1.5,
+                height: MediaQuery.of(context).size.height/1.6,
                 child: Column(
                   children: [
-                    const SizedBox(height: 30,),
+                    const SizedBox(height: 10,),
+
                     Center(child: Text(e1.regNo,style:TextStyle(),textScaleFactor:1.5,),),
                     // Divider(color: Colors.black.withOpacity(2),),
-                    const SizedBox(height: 30,),
+                    const SizedBox(height: 20,),
+                    Divider(
+                        height: 2,
+                        thickness: 1,
+                        color: Colors.black,
+                      ),
+
                     ListTile(
                       leading: Icon(Icons.person_outline),
-                      title: "Username".text.make(),
-                      trailing: Text(e1.name),
+                      title: "Username".text.scale(1.1).make(),
+                      trailing: Text(e1.name,style:TextStyle(),textScaleFactor:1.2),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Divider(
+                        height: 2,
+                        color: Colors.black,
+                      ),
                     ),
                     ListTile(
                       leading: Icon(Icons.bedroom_child_outlined),
-                      title: "Room No".text.make(),
-                      trailing: Text(e1.room),
+                      title: "Room No".text.scale(1.1).make(),
+                      trailing: Text(e1.room,style:TextStyle(),textScaleFactor:1.2),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Divider(
+                        height: 2,
+                        color: Colors.black,
+                      ),
                     ),
                     ListTile(
                       leading: Icon(Icons.phone),
-                      title: "Contact".text.make(),
-                      trailing: Text(e1.phone),
+                      title: "Contact".text.scale(1.1).make(),
+                      trailing: Text(e1.phone,style:TextStyle(),textScaleFactor:1.2),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Divider(
+                        height: 2,
+                        color: Colors.black,
+                      ),
                     ),
                     ListTile(
                       leading: Icon(Icons.mail_outline_outlined),
-                      title: "Email".text.make(),
-                      trailing: Text(e1.email),
+                      title: "Email".text.scale(1.1).make(),
+                      trailing: Text(e1.email,style:TextStyle(),textScaleFactor:1.2),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Divider(
+                        height: 2,
+                        color: Colors.black,
+                      ),
                     ),
                     Spacer(),
                     InkWell(
