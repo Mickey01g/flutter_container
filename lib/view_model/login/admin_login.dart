@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_container/utils/routes_name.dart';
-import 'package:flutter_container/view_model/dashboard/admin_dashboard.dart';
+import 'package:flutter_container/view_model/admin_dashboard/admin_dashboard.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -67,43 +67,42 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
     return SafeArea(
       child: Scaffold(
         body: Material(
-          child: SingleChildScrollView(
-            child: Form(
+          child: Form(
+            child: SingleChildScrollView(
               child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height*1-40,
                 color: Colors.red,
-                child: SingleChildScrollView(
+                child: Expanded(
+                  flex: 2,
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height / 3.7,
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(top: 10),
-                                    child: Text("Hostel Complain System",
-                                      style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500),
-                                      textScaleFactor: 1.3,
-                                    ),
+                            width:double.infinity,
+                            height: MediaQuery.of(context).size.height/3,
+                            child: Column(
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 60),
+                                  child: Text("Hostel Complain System",
+                                    style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500),
+                                    textScaleFactor: 1.3,
                                   ),
-                                  Image.asset("assets/images/university-logo.png", width: 300, height: 200,),
-                                ],
-                              ),
+                                ),
+                                Image.asset("assets/images/university-logo.png", width: 300, height: 200,),
+                              ],
                             )),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20 * 2.5),
-                                topRight: Radius.circular(20 * 2.5),
-                              )),
-                          child: SingleChildScrollView(
+                        Expanded(
+                          child: Container(
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height*1,
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20 * 2.5),
+                                  topRight: Radius.circular(20 * 2.5),
+                                )),
                             child: Column(
                               children: [
                                 const Column(
@@ -120,9 +119,10 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                                   child: Column(
                                     children: [
                                       //=========Login Id input here============
-                                      SizedBox(
-                                        width: MediaQuery.of(context).size.width / 1.1,
-                                        child: SingleChildScrollView(
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                                        child: SizedBox(
+                                          width: double.infinity,
                                           child: Form(
                                             key: formKey,
                                             child: Column(

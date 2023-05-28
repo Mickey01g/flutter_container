@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 class HostelFacultyPage extends StatelessWidget {
   const HostelFacultyPage({super.key});
 
@@ -8,10 +9,12 @@ class HostelFacultyPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: const Text("Hostel Faculty"),
+        title:Center(child: "Hostel Faculty".text.letterSpacing(2).scale(1.4).make()),
       ),
-      body: const Material(
-        child:Center(child: Text("Hello Student's")),
+      body:SafeArea(
+        child:Container(
+          child: Image.asset("assets/images/hostel-faculty.jpg",fit: BoxFit.fill,),
+        )
       ),
     );
   }

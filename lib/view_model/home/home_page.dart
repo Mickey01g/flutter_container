@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       // ======= student login here ==========
                       ElevatedButton(onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(context, RouteName.studentlogin, (route) =>route.isFirst);
+                        Navigator.pushNamed(context, RouteName.studentlogin,);
                       },
                         style: TextButton.styleFrom(
                             minimumSize: const Size(140, 80)),
@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(width: 10,),
                       // ======= admin login here =============
                       ElevatedButton(onPressed: () {
-                        Navigator.pushReplacementNamed(context,RouteName.adminlogin);
+                        Navigator.pushNamed(context,RouteName.adminlogin);
                       }, style: TextButton.styleFrom(
                           minimumSize: const Size(140, 80)), child: const Text("Admin Login"),
                       ),
@@ -137,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(height: 10,),
                       //======faculty button start form here============
                       ElevatedButton(onPressed: () {
-                        Navigator.pushReplacementNamed(context,RouteName.hostelfaculty);
+                        Navigator.pushNamed(context,RouteName.hostelfaculty);
                       },style: TextButton.styleFrom(minimumSize: const Size(290, 60)),
                         child: const Text("Hostel Faculty"),
                       ),

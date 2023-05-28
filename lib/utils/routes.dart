@@ -1,56 +1,52 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_container/pages/news_page.dart';
+import 'package:flutter_container/view_model/home/news_page.dart';
 import 'package:flutter_container/utils/routes_name.dart';
-import 'package:flutter_container/view_model/complaint/complain.dart';
-import 'package:flutter_container/view_model/complaint/student_complaint.dart';
-import 'package:flutter_container/view_model/dashboard/admin_dashboard.dart';
-import 'package:flutter_container/view_model/dashboard/student_dashboard.dart';
-import 'package:flutter_container/view_model/home/announcement.dart';
+import 'package:flutter_container/view_model/admin_dashboard/admin_dashboard.dart';
+import 'package:flutter_container/view_model/admin_dashboard/create_announcement.dart';
 import 'package:flutter_container/view_model/home/home_page.dart';
 import 'package:flutter_container/view_model/home/hostel_faculty_page.dart';
 import 'package:flutter_container/view_model/login/admin_login.dart';
 import 'package:flutter_container/view_model/login/sLoginPage.dart';
 import 'package:flutter_container/view_model/profile/student_profile.dart';
 import 'package:flutter_container/view_model/user_create/create_user.dart';
-import 'package:path/path.dart';
-
 import '../view_model/services/splash_screen.dart';
+import '../view_model/student_dashboard/complaint/complain.dart';
+import '../view_model/student_dashboard/complaint/student_complaint.dart';
+import '../view_model/student_dashboard/student_dashboard.dart';
 
 class Routes{
   static Route<dynamic> generateRoute(RouteSettings settings){
     switch(settings.name){
       case RouteName.splashscreen:
-        return MaterialPageRoute(builder: (context)=> SplashScreen ());
+        return MaterialPageRoute(builder: (context)=> const SplashScreen ());
       case RouteName.homepage:
-        return MaterialPageRoute(builder: (context)=> HomePage());
+        return MaterialPageRoute(builder: (context)=> const HomePage());
       case RouteName.studentlogin:
-        return MaterialPageRoute(builder: (context)=>SLoginPage());
+        return MaterialPageRoute(builder: (context)=>const SLoginPage());
       case RouteName.adminlogin:
-        return MaterialPageRoute(builder: (context)=>AdminLoginPage());
+        return MaterialPageRoute(builder: (context)=>const AdminLoginPage());
       case RouteName.announcement:
-        return MaterialPageRoute(builder: (context)=>Announcement());
+        return MaterialPageRoute(builder: (context)=>const Announcement());
       case RouteName.hostelfaculty:
-        return MaterialPageRoute(builder: (context)=>HostelFacultyPage());
+        return MaterialPageRoute(builder: (context)=>const HostelFacultyPage());
       case RouteName.studentprofile:
-        return MaterialPageRoute(builder: (context)=>StudentProfile());
+        return MaterialPageRoute(builder: (context)=>const StudentProfile());
       case RouteName.studentdashboard:
-        return MaterialPageRoute(builder: (context)=>StudentDashboardPage());
+        return MaterialPageRoute(builder: (context)=>const StudentDashboardPage());
       case RouteName.admindashboard:
-        return MaterialPageRoute(builder: (context)=>AdminDashboard());
+        return MaterialPageRoute(builder: (context)=>const AdminDashboard());
       case RouteName.complaint:
         return MaterialPageRoute(builder: (context)=>Complain());
       case RouteName.mycomplaint:
-        return MaterialPageRoute(builder: (context)=>MyComplaint());
+        return MaterialPageRoute(builder: (context)=>const MyComplaint());
       case RouteName.newspage:
         return MaterialPageRoute(builder: (context)=>NewsPage());
       case RouteName.createuser:
-        return MaterialPageRoute(builder: (context)=>CreateUser());
-
+        return MaterialPageRoute(builder: (context)=>const CreateUser());
 
       default:
         return MaterialPageRoute(builder: (context){
-          return Scaffold(
+          return const Scaffold(
             body: Center(child: Text("Some thing went Wrong"),),
           );
         });

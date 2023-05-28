@@ -5,6 +5,7 @@ import 'package:flutter_container/component/inputfield.dart';
 import 'package:flutter_container/component/roundbutton.dart';
 import 'package:flutter_container/utils/routes_name.dart';
 import 'package:flutter_container/view_model/login/login_controller.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -40,10 +41,10 @@ class _SLoginPageState extends State<SLoginPage> {
         UserCredential userCredential=await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
         if(userCredential.user != null){
           // ignore: use_build_context_synchronously
-          Navigator.pushNamedAndRemoveUntil(context,RouteName.studentdashboard, (route) =>route.isFirst);
+          Navigator.pushReplacementNamed(context,RouteName.studentdashboard);
         }
       }on FirebaseAuthException catch(e){
-        SignController.toastMessage(e.code.upperCamelCase.toString());
+        Fluttertoast.showToast(msg: e.toString());
       }
     }
   }
@@ -68,43 +69,42 @@ class _SLoginPageState extends State<SLoginPage> {
     return SafeArea(
       child: Scaffold(
         body: Material(
-          child: SingleChildScrollView(
-            child: Form(
+          child: Form(
+            child: SingleChildScrollView(
               child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height*1-40,
                 color: Colors.red,
-                child: SingleChildScrollView(
+                child: Expanded(
+                  flex: 2,
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height / 3.7,
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(top: 10),
-                                    child: Text("Hostel Complain System",
-                                      style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500),
-                                      textScaleFactor: 1.3,
-                                    ),
+                            width:double.infinity,
+                            height: MediaQuery.of(context).size.height/3,
+                            child: Column(
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 60),
+                                  child: Text("Hostel Complain System",
+                                    style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500),
+                                    textScaleFactor: 1.3,
                                   ),
-                                  Image.asset("assets/images/university-logo.png", width: 300, height: 200,),
-                                ],
-                              ),
+                                ),
+                                Image.asset("assets/images/university-logo.png", width: 300, height: 200,),
+                              ],
                             )),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20 * 2.5),
-                                topRight: Radius.circular(20 * 2.5),
-                              )),
-                          child: SingleChildScrollView(
+                        Expanded(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20 * 2.5),
+                                  topRight: Radius.circular(20 * 2.5),
+                                )),
                             child: Column(
                               children: [
                                 const Column(
@@ -121,9 +121,10 @@ class _SLoginPageState extends State<SLoginPage> {
                                   child: Column(
                                     children: [
                                       //=========Login Id input here============
-                                      SizedBox(
-                                        width: MediaQuery.of(context).size.width / 1.1,
-                                        child: SingleChildScrollView(
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                                        child: SizedBox(
+                                          width: double.infinity,
                                           child: Form(
                                             key: formKey,
                                             child: Column(

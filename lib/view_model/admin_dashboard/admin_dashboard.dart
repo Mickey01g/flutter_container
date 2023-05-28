@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_container/view_model/drawer/admin_drawer.dart';
-import 'package:flutter_container/view_model/home/announcement.dart';
+import 'package:flutter_container/view_model/admin_dashboard/create_announcement.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter_container/view_model/user_create/createuser.dart';
 import '../../utils/routes_name.dart';

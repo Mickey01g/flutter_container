@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
-import 'package:flutter_container/view_model/dashboard/admin_dashboard.dart';
+import 'package:flutter_container/view_model/admin_dashboard/admin_dashboard.dart';
 import 'package:flutter_container/view_model/dashboard/student_dashboard.dart';
 import 'package:flutter_container/view_model/home/home_page.dart';
 import 'package:flutter_container/utils/routes_name.dart';

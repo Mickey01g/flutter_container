@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gsheets/gsheets.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../component/sign_controller.dart';
@@ -85,7 +86,7 @@ fetch3() async {
       }
     }
     if (flag==1){
-      SignController.toastMessage("User Not Found");
+      Fluttertoast.showToast(msg: "User Not Found");
     }
 
 

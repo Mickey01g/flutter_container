@@ -1,14 +1,8 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_container/utils/routes.dart';
 import 'package:flutter_container/utils/routes_name.dart';
-import 'package:flutter_container/view_model/complaint/complain.dart';
-import 'package:flutter_container/view_model/complaint/student_complaint.dart';
-import 'package:flutter_container/view_model/dashboard/student_dashboard.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +12,6 @@ void main() async{
   // if (kDebugMode) {
   //   print(snapshot.docs.toList());
   // }
-
   runApp( MyApp());
 }
 class MyApp extends StatefulWidget {
@@ -32,10 +25,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-        return
-           MaterialApp(
+        return MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: (FirebaseAuth.instance.currentUser != null)? const StudentDashboardPage(): const HomeScreen(),
+            home:HomeScreen(),
           );
       }
 }
