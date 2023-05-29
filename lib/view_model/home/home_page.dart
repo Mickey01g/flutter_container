@@ -71,7 +71,6 @@ class _HomePageState extends State<HomePage> {
           child: Center(
             child: Container(
               decoration:BoxDecoration(
-                color: Colors.black.withOpacity(0.2),
               ),
               width:double.infinity,
               height:MediaQuery.sizeOf(context).height*1,

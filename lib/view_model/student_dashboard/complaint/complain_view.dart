@@ -9,7 +9,7 @@ class ComplainView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: "Track Complain".text.make(),
+        title: "Complain".text.make(),
       ),
       body: Material(
         child: Padding(

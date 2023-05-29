@@ -8,7 +8,7 @@ class GlobalComplain extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: "Track Complain".text.make(),
+        title: "Complain".text.make(),
       ),
       body: Material(
         child: Padding(
@@ -18,8 +18,8 @@ class GlobalComplain extends StatelessWidget {
               Card(
                 color: Colors.green.shade300,
                 child: ListTile(
-                  title:Text(e1.name,style: TextStyle(color: Colors.white),),
-                  subtitle:Text(e1.room,style: TextStyle(color: Colors.white),),
+                  title:Text("\nStudent complain here\n",style: TextStyle(color: Colors.white),textScaleFactor: 1,),
+                  subtitle:Text(e1.name+"\n"+e1.room,style: TextStyle(color: Colors.white),textScaleFactor: 1,),
                 ),
               ),
             ],

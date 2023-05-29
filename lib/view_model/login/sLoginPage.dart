@@ -29,6 +29,8 @@ class _SLoginPageState extends State<SLoginPage> {
   }
   final formKey = GlobalKey<FormState>();
   final auth=FirebaseAuth.instance;
+  // FirebaseAuth getuser=FirebaseAuth.instance.currentUser?.uid as FirebaseAuth;
+
 
   void login() async{
     String email =emailController.text.trim();
@@ -172,8 +174,6 @@ class _SLoginPageState extends State<SLoginPage> {
                                                            sp.setBool('isLogin',true);
                                                            sp.setString('userType','student');
                                                            // ignore: use_build_context_synchronously
-
-                                                           // auth.createUserWithEmailAndPassword(email:emailController.text.trim(), password:passwordController.text.trim());
 
                                                          }
                                                        },

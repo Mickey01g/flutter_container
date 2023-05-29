@@ -1,11 +1,9 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_container/utils/routes_name.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gsheets/gsheets.dart';
-import 'package:velocity_x/velocity_x.dart';
 import '../../component/inputfield.dart';
 import '../../component/sign_controller.dart';
 
@@ -15,13 +13,15 @@ class AdminData {
   late String name;
   late String phone;
   late String role;
+  late String adminuser;
   AdminData(
       {required this.name,
         required this.phone,
         required this.role,
+        required this.adminuser,
       });
 }
-final admin = AdminData(name: '', phone: '', role: '');
+final admin = AdminData(name: '', phone: '', role: '', adminuser: '');
 
 
 
@@ -40,7 +40,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
   final formKey = GlobalKey<FormState>();
 
   void login() async{
-    String userId =emailController.text.trim();
+    String userId =userIdController.text.trim();
     String password =passwordController.text.trim();
     const credentials = r'''
   {
@@ -66,11 +66,13 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
     for (var i = 1; i <= 10; i++) {
       cellsRow = await sheet?.cells.row(i);
       if(cellsRow?.elementAt(2)!=null) {
+
       }
       if (userId==cellsRow?.elementAt(2).value.toString() && password ==cellsRow?.elementAt(3).value.toString()){
         var name=cellsRow?.elementAt(1).value.toString();
         var role=cellsRow?.elementAt(4).value.toString();
         var mobile=cellsRow?.elementAt(5).value.toString();
+        var adminuser=cellsRow?.elementAt(2).value.toString();
         admin.name=name.toString();
         admin.role=role.toString();
         admin.phone=mobile.toString();
@@ -83,18 +85,18 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
       }
     }
   }
-  final emailController=TextEditingController();
+  final userIdController=TextEditingController();
   final passwordController=TextEditingController();
-  final emailFocusNode=FocusNode();
+  final userIdFocusNode=FocusNode();
   final passwordFocusNode=FocusNode();
 
   @override
   void dispose(){
     // TODO: implement dispose
     super.dispose();
-    emailController.dispose();
+    userIdController.dispose();
     passwordController.dispose();
-    emailFocusNode.dispose();
+    userIdFocusNode.dispose();
     passwordFocusNode.dispose();
   }
 
@@ -165,17 +167,19 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                                             child: Column(
                                               children: [
                                                 InputTextField(
-                                                    myController: emailController,
-                                                    focusNode: emailFocusNode,
+                                                    myController: userIdController,
+                                                    focusNode: userIdFocusNode,
                                                     onFieldSubmitValue:(value){
-                                                      SignController.fieldFocus(context, emailFocusNode, passwordFocusNode);
+                                                      SignController.fieldFocus(context, userIdFocusNode, passwordFocusNode);
                                                     },
                                                     keyBoradType: TextInputType.emailAddress,
                                                     obscureText: false,
-                                                    hint: "Email",
-                                                    onValidator:(value){
-                                                      return value.isEmpty ? 'Enter email' :null;
-                                                    }),
+                                                    hint: "User Id",
+                                                  onValidator: (value) {
+                                                    if(value==null || value.isEmpty){
+                                                      return "Enter UserId";
+                                                    }
+                                                  },),
                                                 const SizedBox(height: 10,),
                                                 //=======Login Password input here=========
                                                 InputTextField(myController: passwordController,
@@ -184,10 +188,15 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                                                     keyBoradType: TextInputType.text,
                                                     obscureText: true,
                                                     hint: "Password",
-                                                    onValidator:(value){
-                                                      return value.isEmpty ? 'Enter password' :null;
-                                                    }),
+                                                    onValidator: (value) {
+                                                     if(value==null || value.isEmpty){
+                                                       return "Enter Password";
+                                                     }
+                                                    },
+
+                                                    ),
                                                 const SizedBox(height: 50,),
+
                                                 InkWell(
                                                     onTap: (){
                                                       login();

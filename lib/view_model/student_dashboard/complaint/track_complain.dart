@@ -19,8 +19,15 @@ class TrackComplain extends StatelessWidget {
                 Card(
                   color: Colors.green.shade300,
                   child: ListTile(
-                    title:Text(e1.name,style: TextStyle(color: Colors.white),),
-                    subtitle:Text(e1.room,style: TextStyle(color: Colors.white),),
+                    title:const Text("\nStudent complaint\n",style: TextStyle(color: Colors.white),textScaleFactor: 1,),
+                    subtitle:Text("${e1.name}\n${e1.room}",style: TextStyle(color: Colors.white),textScaleFactor: 1,),
+                  ),
+                ),
+                Card(
+                  color: Colors.redAccent,
+                  child: ListTile(
+                    title:const Text("\nFan is not working\n",style: TextStyle(color: Colors.white),textScaleFactor: 1,),
+                    subtitle:Text("${e1.name}\n${e1.room}",style: TextStyle(color: Colors.white),textScaleFactor: 1,),
                   ),
                 ),
               ],

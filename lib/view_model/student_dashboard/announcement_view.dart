@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_container/view_model/login/admin_login.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../services/data_fetch.dart';
@@ -19,8 +20,8 @@ class AnnouncementView extends StatelessWidget {
               Card(
                 color: Colors.green.shade300,
                 child: ListTile(
-                  title:Text(e1.name,style: TextStyle(color: Colors.white),),
-                  subtitle:Text(e1.room,style: TextStyle(color: Colors.white),),
+                  title:const Text("\nAnnouncement For Student\n",style: TextStyle(color: Colors.white),textScaleFactor: 1,),
+                  subtitle:Text(admin.name+"\n"+admin.role,style: TextStyle(color: Colors.white),textScaleFactor: 1,),
                 ),
               ),
             ],

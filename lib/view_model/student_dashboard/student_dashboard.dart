@@ -148,7 +148,7 @@ class _StudentDashboardPageState extends State<StudentDashboardPage> {
                                   const SizedBox(width: 20,),
                                   InkWell(
                                     onTap: (){
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const MyComplaint()));
+                                      Navigator.pushNamed(context,RouteName.mycomplaint);
                                     },
                                     child:Card(
                                       color: Colors.blue.shade300,
