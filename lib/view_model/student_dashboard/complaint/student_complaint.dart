@@ -34,9 +34,6 @@ Future<void>? hostelDatabase(String name, String room, String contact) async {
   await sheet?.values.insertValue(name, column: 1, row: 1);
   await sheet?.values.insertValue(room, column: 2, row: 1);
   await sheet?.values.insertValue(contact, column: 3, row: 1);
-  if (kDebugMode) {
-    print("LAUDA BENCHO_\n\n\n\n\n");
-  }
 }
 
 class MyComplaint extends StatefulWidget {
@@ -81,7 +78,7 @@ class _MyComplaintState extends State<MyComplaint> {
                           child: SizedBox(
                               width: 400,
                               child: Text(
-                                "COMPLAINT",
+                                "COMPLAINT",textScaleFactor: 1.3,
                                 style: TextStyle(fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center,
                               )),
@@ -95,18 +92,9 @@ class _MyComplaintState extends State<MyComplaint> {
                           height: 25,
                           child: Row(
                             children: [
-                               Text("Name :"),
+                               Text("Name : "+"\t\t"+e1.name,textScaleFactor: 1.2,),
                                SizedBox(
                                 width: 20,
-                              ),
-                              SizedBox(
-                                width: 100,
-                                child: TextFormField(
-                                  decoration:  InputDecoration(
-                                    border: InputBorder.none,
-                                    labelText: name,
-                                  ),
-                                ),
                               ),
                             ],
                           ),
@@ -119,18 +107,9 @@ class _MyComplaintState extends State<MyComplaint> {
                           height: 25,
                           child: Row(
                             children: [
-                              const Text("Room no :"),
+                              Text("Room : "+"\t\t"+e1.room,textScaleFactor: 1.2,),
                               const SizedBox(
                                 width: 20,
-                              ),
-                              SizedBox(
-                                width: 100,
-                                child: TextFormField(
-                                  decoration:  InputDecoration(
-                                    border: InputBorder.none,
-                                    labelText: room,
-                                  ),
-                                ),
                               ),
                             ],
                           ),
@@ -143,18 +122,9 @@ class _MyComplaintState extends State<MyComplaint> {
                           height: 25,
                           child: Row(
                             children: [
-                              const Text("Contact :"),
+                              Text("Contact : "+"\t\t"+e1.phone,textScaleFactor: 1.2,),
                               const SizedBox(
                                 width: 20,
-                              ),
-                              SizedBox(
-                                width: 100,
-                                child: TextFormField(
-                                  decoration:  InputDecoration(
-                                    border: InputBorder.none,
-                                    labelText: contact,
-                                  ),
-                                ),
                               ),
                             ],
                           ),
@@ -183,7 +153,7 @@ class _MyComplaintState extends State<MyComplaint> {
                         child: SizedBox(
                             width: 400,
                             child: Text(
-                              "COMPLAINT",
+                              "COMPLAINT TYPE",textScaleFactor: 1.3,
                               style: TextStyle(fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             )),
